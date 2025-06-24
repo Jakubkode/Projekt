@@ -30,3 +30,10 @@ class Przewodnik:
         self.punkt = punkt
         self.wspolrzedne = punkt.wspolrzedne
         self.marker = map_widget.set_marker(self.wspolrzedne[0], self.wspolrzedne[1], text=f"Przewodnik: {self.imie} {self.nazwisko}")
+
+class Klient:
+    def __init__(self, imie, punkt):
+        self.imie = imie
+        self.punkt = punkt
+        self.wspolrzedne = punkt.wspolrzedne
+        self.marker = map_widget.set_marker(self.wspolrzedne[0], self.wspolrzedne[1], text=f"Klient: {self.imie}")
