@@ -22,3 +22,11 @@ class PunktTurystyczny:
         latitude = float(soup.select(".latitude")[1].text.replace(",", "."))
         longitude = float(soup.select(".longitude")[1].text.replace(",", "."))
         return [latitude, longitude]
+
+class Przewodnik:
+    def __init__(self, imie, nazwisko, punkt):
+        self.imie = imie
+        self.nazwisko = nazwisko
+        self.punkt = punkt
+        self.wspolrzedne = punkt.wspolrzedne
+        self.marker = map_widget.set_marker(self.wspolrzedne[0], self.wspolrzedne[1], text=f"Przewodnik: {self.imie} {self.nazwisko}")
