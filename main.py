@@ -136,3 +136,55 @@ def pokaz_przewodnikow_punktu():
             if p.punkt == punkt:
                 p.marker = map_widget.set_marker(p.wspolrzedne[0], p.wspolrzedne[1], text=f"Przewodnik: {p.imie} {p.nazwisko}")
 
+# ===== GUI
+root = Tk()
+root.geometry("1200x800")
+root.title("System zarządzania punktami turystycznymi i przewodnikami")
+
+# === RAMKI
+frame_punkt = Frame(root); frame_punkt.grid(row=0, column=0, sticky=N, padx=10)
+frame_przewodnik = Frame(root); frame_przewodnik.grid(row=0, column=1, sticky=N, padx=10)
+frame_klient = Frame(root); frame_klient.grid(row=0, column=2, sticky=N, padx=10)
+frame_kontrola = Frame(root); frame_kontrola.grid(row=1, column=0, columnspan=3, pady=10)
+frame_mapa = Frame(root); frame_mapa.grid(row=2, column=0, columnspan=3)
+
+# === PUNKTY
+Label(frame_punkt, text="Dodaj punkt turystyczny").pack()
+entry_nazwa_punktu = Entry(frame_punkt); entry_nazwa_punktu.pack()
+entry_lokalizacja_punktu = Entry(frame_punkt); entry_lokalizacja_punktu.pack()
+Button(frame_punkt, text="Dodaj punkt", command=dodaj_punkt).pack()
+Button(frame_punkt, text="Usuń punkt", command=usun_punkt).pack()
+listbox_punkty = Listbox(frame_punkt, width=30); listbox_punkty.pack()
+
+# === PRZEWODNICY
+Label(frame_przewodnik, text="Dodaj przewodnika").pack()
+entry_imie_przewodnika = Entry(frame_przewodnik); entry_imie_przewodnika.pack()
+entry_nazwisko_przewodnika = Entry(frame_przewodnik); entry_nazwisko_przewodnika.pack()
+combobox_punkt_dla_przewodnika = ttk.Combobox(frame_przewodnik); combobox_punkt_dla_przewodnika.pack()
+Button(frame_przewodnik, text="Dodaj przewodnika", command=dodaj_przewodnika).pack()
+Button(frame_przewodnik, text="Usuń przewodnika", command=usun_przewodnika).pack()
+listbox_przewodnicy = Listbox(frame_przewodnik, width=30); listbox_przewodnicy.pack()
+
+# === KLIENCI
+Label(frame_klient, text="Dodaj klienta").pack()
+entry_imie_klienta = Entry(frame_klient); entry_imie_klienta.pack()
+combobox_punkt_dla_klienta = ttk.Combobox(frame_klient); combobox_punkt_dla_klienta.pack()
+Button(frame_klient, text="Dodaj klienta", command=dodaj_klienta).pack()
+Button(frame_klient, text="Usuń klienta", command=usun_klienta).pack()
+listbox_klienci = Listbox(frame_klient, width=30); listbox_klienci.pack()
+
+# === KONTROLA MAPY
+Label(frame_kontrola, text="Punkt:").grid(row=0, column=0)
+combobox_punkt_na_mapie = ttk.Combobox(frame_kontrola, width=25); combobox_punkt_na_mapie.grid(row=0, column=1)
+
+Button(frame_kontrola, text="Pokaż wszystkie punkty", command=pokaz_wszystkie_punkty).grid(row=1, column=0, padx=5)
+Button(frame_kontrola, text="Pokaż wszystkich przewodników", command=pokaz_wszystkich_przewodnikow).grid(row=1, column=1, padx=5)
+Button(frame_kontrola, text="Pokaż klientów punktu", command=pokaz_klientow_punktu).grid(row=1, column=2, padx=5)
+Button(frame_kontrola, text="Pokaż przewodników punktu", command=pokaz_przewodnikow_punktu).grid(row=1, column=3, padx=5)
+
+# === MAPA
+map_widget = tkintermapview.TkinterMapView(frame_mapa, width=1150, height=500)
+map_widget.set_position(52.23, 21.0); map_widget.set_zoom(6)
+map_widget.pack()
+
+root.mainloop()
