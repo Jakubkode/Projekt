@@ -57,4 +57,12 @@ def dodaj_punkt():
         entry_lokalizacja_punktu.delete(0, END)
         odswiez_comboboxy()
 
+def usun_punkt():
+    idx = listbox_punkty.curselection()
+    if idx:
+        i = idx[0]
+        punkty_turystyczne[i].marker.delete()
+        punkty_turystyczne.pop(i)
+        listbox_punkty.delete(i)
+        odswiez_comboboxy()
 
