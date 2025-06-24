@@ -57,3 +57,4 @@ def dodaj_punkt():
         entry_lokalizacja_punktu.delete(0, END)
         odswiez_comboboxy()
 
+
