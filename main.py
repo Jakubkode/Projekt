@@ -66,3 +66,13 @@ def usun_punkt():
         listbox_punkty.delete(i)
         odswiez_comboboxy()
 
+def dodaj_przewodnika():
+    imie = entry_imie_przewodnika.get()
+    nazwisko = entry_nazwisko_przewodnika.get()
+    idx = combobox_punkt_dla_przewodnika.current()
+    if idx >= 0:
+        przewodnik = Przewodnik(imie, nazwisko, punkty_turystyczne[idx])
+        przewodnicy.append(przewodnik)
+        listbox_przewodnicy.insert(END, f"{imie} {nazwisko}")
+        entry_imie_przewodnika.delete(0, END)
+        entry_nazwisko_przewodnika.delete(0, END)
