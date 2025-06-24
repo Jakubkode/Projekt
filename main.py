@@ -76,3 +76,12 @@ def dodaj_przewodnika():
         listbox_przewodnicy.insert(END, f"{imie} {nazwisko}")
         entry_imie_przewodnika.delete(0, END)
         entry_nazwisko_przewodnika.delete(0, END)
+
+def usun_przewodnika():
+    idx = listbox_przewodnicy.curselection()
+    if idx:
+        i = idx[0]
+        przewodnicy[i].marker.delete()
+        przewodnicy.pop(i)
+        listbox_przewodnicy.delete(i)
+
