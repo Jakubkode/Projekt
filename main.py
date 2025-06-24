@@ -102,3 +102,37 @@ def usun_klienta():
         klienci.pop(i)
         listbox_klienci.delete(i)
 
+# ===== MAPA
+def czysc_markery():
+    for x in punkty_turystyczne + przewodnicy + klienci:
+        if hasattr(x, 'marker'):
+            x.marker.delete()
+
+def pokaz_wszystkie_punkty():
+    czysc_markery()
+    for p in punkty_turystyczne:
+        p.marker = map_widget.set_marker(p.wspolrzedne[0], p.wspolrzedne[1], text=f"Punkt: {p.nazwa}")
+
+def pokaz_wszystkich_przewodnikow():
+    czysc_markery()
+    for p in przewodnicy:
+        p.marker = map_widget.set_marker(p.wspolrzedne[0], p.wspolrzedne[1], text=f"Przewodnik: {p.imie} {p.nazwisko}")
+
+def pokaz_klientow_punktu():
+    czysc_markery()
+    idx = combobox_punkt_na_mapie.current()
+    if idx >= 0:
+        punkt = punkty_turystyczne[idx]
+        for k in klienci:
+            if k.punkt == punkt:
+                k.marker = map_widget.set_marker(k.wspolrzedne[0], k.wspolrzedne[1], text=f"Klient: {k.imie}")
+
+def pokaz_przewodnikow_punktu():
+    czysc_markery()
+    idx = combobox_punkt_na_mapie.current()
+    if idx >= 0:
+        punkt = punkty_turystyczne[idx]
+        for p in przewodnicy:
+            if p.punkt == punkt:
+                p.marker = map_widget.set_marker(p.wspolrzedne[0], p.wspolrzedne[1], text=f"Przewodnik: {p.imie} {p.nazwisko}")
+
