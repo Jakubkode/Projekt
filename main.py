@@ -37,3 +37,22 @@ class Klient:
         self.punkt = punkt
         self.wspolrzedne = punkt.wspolrzedne
         self.marker = map_widget.set_marker(self.wspolrzedne[0], self.wspolrzedne[1], text=f"Klient: {self.imie}")
+
+# ===== FUNKCJE ODSWIEZANIA
+def odswiez_comboboxy():
+    nazwy = [p.nazwa for p in punkty_turystyczne]
+    combobox_punkt_dla_przewodnika['values'] = nazwy
+    combobox_punkt_dla_klienta['values'] = nazwy
+    combobox_punkt_na_mapie['values'] = nazwy
+
+# ===== DODAWANIE I USUWANIE
+def dodaj_punkt():
+    nazwa = entry_nazwa_punktu.get()
+    lokalizacja = entry_lokalizacja_punktu.get()
+    if nazwa and lokalizacja:
+        punkt = PunktTurystyczny(nazwa, lokalizacja)
+        punkty_turystyczne.append(punkt)
+        listbox_punkty.insert(END, f"{punkt.nazwa} ({punkt.lokalizacja})")
+        entry_nazwa_punktu.delete(0, END)
+        entry_lokalizacja_punktu.delete(0, END)
+        odswiez_comboboxy()
