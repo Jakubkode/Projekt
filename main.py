@@ -85,3 +85,20 @@ def usun_przewodnika():
         przewodnicy.pop(i)
         listbox_przewodnicy.delete(i)
 
+def dodaj_klienta():
+    imie = entry_imie_klienta.get()
+    idx = combobox_punkt_dla_klienta.current()
+    if idx >= 0:
+        klient = Klient(imie, punkty_turystyczne[idx])
+        klienci.append(klient)
+        listbox_klienci.insert(END, imie)
+        entry_imie_klienta.delete(0, END)
+
+def usun_klienta():
+    idx = listbox_klienci.curselection()
+    if idx:
+        i = idx[0]
+        klienci[i].marker.delete()
+        klienci.pop(i)
+        listbox_klienci.delete(i)
+
